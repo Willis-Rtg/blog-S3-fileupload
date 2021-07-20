@@ -1,7 +1,7 @@
 import fs from "fs";
 import { Resolvers } from "./type";
 
-const createFile: Resolvers = {
+const uploadFile: Resolvers = {
   Mutation: {
     createFile: async (_, { file }) => {
       if (!file) return false;
@@ -16,4 +16,4 @@ const createFile: Resolvers = {
   },
 };
 
-export default createFile;
+export default uploadFile;

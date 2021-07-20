@@ -1,7 +1,7 @@
 import { ApolloServer, gql } from "apollo-server-express";
 import express from "express";
 import { GraphQLUpload, graphqlUploadExpress } from "graphql-upload";
-import createFile from "./createFile";
+import uploadFile from "./uploadFile";
 
 const typeDefs = gql`
   scalar Upload
@@ -16,7 +16,8 @@ let resolvers = {
   Upload: GraphQLUpload,
 };
 
-resolvers = { ...resolvers, ...createFile };
+resolvers = { ...resolvers, ...uploadFile };
+
 async function startServer() {
   const apollo = new ApolloServer({ typeDefs, resolvers });
   await apollo.start();
