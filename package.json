@@ -1,0 +1,23 @@
+{
+  "name": "fileupload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec ts-node src/server --ext ts,js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "graphql": "^15.5.1",
+    "graphql-upload": "^12.0.0"
+  },
+  "devDependencies": {
+    "apollo-server-express": "^3.0.1",
+    "express": "^4.17.1",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5",
+    "nodemon": "^2.0.12"
+  }
+}
