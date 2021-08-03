@@ -1,5 +1,13 @@
-import fs from "fs";
 import { Resolvers } from "./type";
+import { S3 } from "aws-sdk";
+
+const s3 = new S3();
+s3.config.update({
+  credentials: {
+    accessKeyId: process.env.AWS_SECRET_ID,
+    secretAccessKey: process.env.AWS_SECRET_KEY,
+  },
+});
 
 const uploadFile: Resolvers = {
   Mutation: {
@@ -7,10 +15,19 @@ const uploadFile: Resolvers = {
       if (!file) return false;
       const { filename, createReadStream } = await file;
       const readStream = createReadStream();
-      const writeStrem = fs.createWriteStream(
-        `${process.cwd()}/uploads/${filename}` //파일저장 경로
+      const saveFilename = `${Date.now()}-${filename}`;
+      const save = await s3
+        .upload({
+          Bucket: "apollofileupload",
+          Key: saveFilename,
+          Body: readStream,
+          ACL: "public-read",
+        })
+        .promise();
+      console.log(
+        "🚀 ~ file: uploadFile.ts ~ line 34 ~ createFile: ~ save",
+        save
       );
-      readStream.pipe(writeStrem);
       return true;
     },
   },

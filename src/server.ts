@@ -1,3 +1,4 @@
+require("dotenv").config();
 import { ApolloServer, gql } from "apollo-server-express";
 import express from "express";
 import { GraphQLUpload, graphqlUploadExpress } from "graphql-upload";
